@@ -38,12 +38,14 @@ passport.use(
           //when everything is done then we call 'done' with first argument null if as everything is fine while
           //second argument "existingUser" to let passport know the user.
           done(null, existingUser);
+          console.log("Profile ID for Existing user ->", profile.id);
         } else {
           //we need to save our profile ID is its not there in db
           //using promise using "done"
           new User({ googleId: profile.id })
             .save()
             .then(user => done(null, user));
+          console.log("Profile ID for Non Existing user ->", profile.id);
         }
       });
     }
