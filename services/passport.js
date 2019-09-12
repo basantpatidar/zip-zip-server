@@ -31,23 +31,19 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          //we have the recode with the profile ID in out db so we dont need to save it to db.
-          //when everything is done then we call 'done' with first argument null if as everything is fine while
-          //second argument "existingUser" to let passport know the user.
-          done(null, existingUser);
-          console.log("Profile ID for Existing user ->", profile.id);
-        } else {
-          //we need to save our profile ID is its not there in db
-          //using promise using "done"
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-          console.log("Profile ID for Non Existing user ->", profile.id);
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        //we have the recode with the profile ID in out db so we dont need to save it to db.
+        //when everything is done then we call 'done' with first argument null if as everything is fine while
+        //second argument "existingUser" to let passport know the user.
+        return done(null, existingUser);
+      }
+      //we need to save our profile ID is its not there in db
+      //using promise using "done"
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
 );
