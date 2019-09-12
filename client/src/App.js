@@ -3,14 +3,10 @@ import React from "react";
 function App() {
   return (
     <div className="App">
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
+      <a href="/auth/google">Sign In Google</a> <br></br>
+      <a href="/api/current_user">Current User</a>
+      <br></br>
+      <a href="/api/logout">logout</a>
     </div>
   );
 }
