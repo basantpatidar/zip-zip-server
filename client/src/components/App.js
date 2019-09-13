@@ -1,14 +1,20 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import { connet } from "react-redux";
+import * as actions from "../actions";
 
 import Header from "./Header";
+import { connect } from "mongoose";
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 const Landing = () => <h2>Landing</h2>;
 
 class App extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    //called action creater.
+    this.props.fetchUser();
+  }
   render() {
     return (
       <div className="container">
@@ -29,4 +35,9 @@ class App extends React.Component {
   }
 }
 
-export default App;
+//First argument of connect is for mapStateToProp and second is for 'actions' all the deferevt action creators
+// All the "actions" are assigned to the "App" as props.
+export default connect(
+  null,
+  actions
+)(App);
