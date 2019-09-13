@@ -9,7 +9,7 @@ import App from "./components/App";
 import reducers from "./reducers";
 
 // Redux store and passed reducers as arguments.
-const store = createStore(() => reducers, {}, applyMiddleware(reduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 //wired Provider
 ReactDOM.render(

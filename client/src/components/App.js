@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { connet } from "react-redux";
+import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import Header from "./Header";
-import { connect } from "mongoose";
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
@@ -26,10 +25,6 @@ class App extends React.Component {
             <Route path={"/surveys/new"} component={SurveyNew}></Route>
           </div>
         </BrowserRouter>
-        <a href="/auth/google">Sign In Google</a> <br></br>
-        <a href="/api/current_user">Current User</a>
-        <br></br>
-        <a href="/api/logout">logout</a>
       </div>
     );
   }
